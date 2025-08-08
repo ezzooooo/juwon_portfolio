@@ -1,0 +1,41 @@
+{
+  "name": "주원",
+  "title": "Flutter/Dart 엔지니어",
+  "summary": "웹·모바일 전반 UI/상태/아키텍처 설계. 퍼포먼스와 접근성 중심의 제품 개발",
+  "contacts": {
+    "email": "you@example.com",
+    "github": "https://github.com/your-id",
+    "linkedin": "https://www.linkedin.com/in/your-id",
+    "blog": "https://your-blog.com"
+  },
+  "skills": {
+    "frontend": ["Flutter Web", "Material 3", "go_router"],
+    "mobile": ["Flutter", "Riverpod", "Freezed"],
+    "devops": ["GitHub Actions", "Firebase Hosting"],
+    "tools": ["Figma", "Chrome DevTools"]
+  },
+  "experiences": [
+    {
+      "company": "Awesome Corp",
+      "role": "Flutter Engineer",
+      "period": "2023.01 - 현재",
+      "summary": "웹/모바일 크로스플랫폼 UI 개발 및 구조 개선",
+      "achievements": [
+        "Flutter Web 빌드 성능 30% 향상",
+        "클린 아키텍처로 기능 모듈화 및 테스트 커버리지 확장"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Some University",
+      "degree": "B.S. Computer Science",
+      "period": "2016 - 2020"
+    }
+  ],
+  "certificates": [
+    { "name": "정보처리기사", "issuer": "한국산업인력공단", "date": "2020" }
+  ]
+}
+
+

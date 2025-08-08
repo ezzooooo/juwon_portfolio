@@ -1,0 +1,36 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter Web (Chrome)",
+      "type": "dart",
+      "request": "launch",
+      "deviceId": "chrome"
+    },
+    {
+      "name": "Flutter Web (Chrome, CanvasKit)",
+      "type": "dart",
+      "request": "launch",
+      "deviceId": "chrome",
+      "args": ["--web-renderer", "canvaskit"]
+    },
+    {
+      "name": "Flutter Web (Chrome, Profile)",
+      "type": "dart",
+      "request": "launch",
+      "deviceId": "chrome",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "Flutter Web (Chrome, with defines)",
+      "type": "dart",
+      "request": "launch",
+      "deviceId": "chrome",
+      "args": [
+        "--dart-define=GA_MEASUREMENT_ID=G-XXXXXXX"
+      ]
+    }
+  ]
+}
+
+
