@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/widgets/app_scaffold.dart';
+import '../../../core/widgets/layout.dart';
 import '../../../core/widgets/responsive_layout.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,13 +10,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      child: ListView(
-        padding: const EdgeInsets.all(24),
-        children: [
-          _HeroSection(),
-          const SizedBox(height: 24),
-          _HighlightsSection(),
-        ],
+      child: AppContainer(
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 24),
+          children: [
+            _HeroSection(),
+            const SizedBox(height: 32),
+            Section(title: '하이라이트', child: _HighlightsSection()),
+          ],
+        ),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/widgets/app_scaffold.dart';
+import '../../../core/widgets/layout.dart';
 
 class ProjectsPage extends StatefulWidget {
   const ProjectsPage({super.key});
@@ -49,37 +50,39 @@ class _ProjectsPageState extends State<ProjectsPage> {
     }
 
     return AppScaffold(
-      child: FutureBuilder<List<_ProjectCardData>>(
-        future: _loadProjects(context),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Center(child: Text('프로젝트 로딩 실패: ${snapshot.error}'));
-          }
-          final projects = snapshot.data ?? const <_ProjectCardData>[];
-          return ListView(
-            padding: const EdgeInsets.all(24),
-            children: [
-              Text('프로젝트', style: Theme.of(context).textTheme.headlineMedium),
-              const SizedBox(height: 16),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: columns,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 4 / 3,
+      child: AppContainer(
+        child: FutureBuilder<List<_ProjectCardData>>(
+          future: _loadProjects(context),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState != ConnectionState.done) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (snapshot.hasError) {
+              return Center(child: Text('프로젝트 로딩 실패: ${snapshot.error}'));
+            }
+            final projects = snapshot.data ?? const <_ProjectCardData>[];
+            return ListView(
+              padding: const EdgeInsets.symmetric(vertical: 24),
+              children: [
+                const Section(title: '프로젝트', child: SizedBox.shrink()),
+                const SizedBox(height: 8),
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: 4 / 3,
+                  ),
+                  itemCount: projects.length,
+                  itemBuilder: (context, index) =>
+                      _ProjectCard(index: index, data: projects[index]),
                 ),
-                itemCount: projects.length,
-                itemBuilder: (context, index) =>
-                    _ProjectCard(index: index, data: projects[index]),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

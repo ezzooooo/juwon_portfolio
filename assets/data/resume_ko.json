@@ -1,40 +1,93 @@
 {
-  "name": "주원",
-  "title": "Flutter/Dart 엔지니어",
-  "summary": "웹·모바일 전반 UI/상태/아키텍처 설계. 퍼포먼스와 접근성 중심의 제품 개발",
+  "name": "이주원",
+  "title": "크로스플랫폼 앱 개발자 (Flutter)",
+  "summary": "안녕하세요. 니즈를 파악하고 행동하는 개발자 이주원입니다. 4년 차 크로스플랫폼 앱 개발자로서 Flutter 기반 모바일·웹·데스크톱 프로젝트를 리딩했습니다. 복잡한 서비스 구조 개선, 디자인 시스템 구축, 성능 최적화에 강점이 있으며, 스타트업 현장에서의 협업 경험으로 서비스 완성도를 높여왔습니다.",
   "contacts": {
-    "email": "you@example.com",
-    "github": "https://github.com/your-id",
-    "linkedin": "https://www.linkedin.com/in/your-id",
-    "blog": "https://your-blog.com"
+    "email": "dkreka@gmail.com",
+    "github": "https://github.com/ezzooooo",
+    "linkedin": "",
+    "blog": "https://jw.notion.site/cebcbeeaecdf"
   },
   "skills": {
-    "frontend": ["Flutter Web", "Material 3", "go_router"],
-    "mobile": ["Flutter", "Riverpod", "Freezed"],
-    "devops": ["GitHub Actions", "Firebase Hosting"],
-    "tools": ["Figma", "Chrome DevTools"]
+    "frontend": [
+      "Flutter",
+      "GetX",
+      "Riverpod",
+      "Flutter Web",
+      "Flutter Desktop",
+      "In-App Purchase",
+      "Deep Link",
+      "Design System"
+    ],
+    "mobile": ["Android (Jetpack Compose)", "Location Services", "SSE Client"],
+    "backend": ["Laravel", "Python (Scripts)", "C#"],
+    "devops": ["AWS", "Firebase", "GitHub Actions"],
+    "tools": ["Git", "Figma", "Linux", "MySQL", "Redis", "GitHub", "SQL"]
   },
   "experiences": [
     {
-      "company": "Awesome Corp",
-      "role": "Flutter Engineer",
-      "period": "2023.01 - 현재",
-      "summary": "웹/모바일 크로스플랫폼 UI 개발 및 구조 개선",
+      "company": "주식회사 비유바움",
+      "role": "Frontend 개발",
+      "period": "2024.11 - 2025.04 (6개월)",
+      "summary": "Digital Information Display 프론트엔드 개발 (Android 앱 2종, SSE 기반 제어/업데이트)",
       "achievements": [
-        "Flutter Web 빌드 성능 30% 향상",
-        "클린 아키텍처로 기능 모듈화 및 테스트 커버리지 확장"
+        "Jetpack Compose 기반 UI 개발",
+        "Server-Sent-Events로 실시간 기기 제어",
+        "기기 재시작 시 앱 자동 실행",
+        "앱 원격 업데이트 기능"
+      ]
+    },
+    {
+      "company": "바움랩스주식회사",
+      "role": "Frontend 개발",
+      "period": "2024.04 - 2024.11 (8개월)",
+      "summary": "히어유알 모임관리 앱 리팩토링 및 기능 개선, iOS 배포 이슈 해결",
+      "achievements": [
+        "캘린더 기반 UI/UX 개편",
+        "위치 기반 맛집 추천 기능(Tmap API)",
+        "GetX → Riverpod 마이그레이션 및 안전한 Context 사용",
+        "이벤트 딥링크 구현",
+        "API 응답 제네릭 모델링",
+        "로딩/사용 속도 개선(컨트롤러 생명주기 최적화)"
+      ]
+    },
+    {
+      "company": "주식회사디에이엘컴퍼니",
+      "role": "Frontend 개발",
+      "period": "2023.06 - 2023.11 (6개월)",
+      "summary": "인앱 결제 기능 기획·구현 및 출시",
+      "achievements": [
+        "결제 프로세스 정립",
+        "InAppPurchase 기반 인앱 결제 구현",
+        "디자인 시스템 기반 UI Kit 구축",
+        "재사용 위젯화로 개발 속도 40% 향상, 일관성 확보"
+      ]
+    },
+    {
+      "company": "주식회사세븐미어캣",
+      "role": "개발팀장",
+      "period": "2020.07 - 2022.11 (2년 5개월)",
+      "summary": "서비스 전체 구조 설계/개발 및 운영, 시리즈 A 투자 유치 기여",
+      "achievements": [
+        "주차 시스템/앱/관리자 웹 상호 데이터 기반 DB 설계",
+        "1초 이내 차단기 신호 위한 별도 주차 서버 구축",
+        "앱 내 쇼핑몰(재고/타임할인/옵션/주문/배송) 개발",
+        "Flutter 마이그레이션 2회 및 Null Safety 개선",
+        "생산 단가 30%+ 절감(라즈베리파이 분리 구조), CS 50%+ 감소"
       ]
     }
   ],
   "education": [
     {
-      "school": "Some University",
-      "degree": "B.S. Computer Science",
-      "period": "2016 - 2020"
+      "school": "한국공학대학교",
+      "degree": "컴퓨터공학과 학사 (3.94/4.5)",
+      "period": ""
     }
   ],
   "certificates": [
-    { "name": "정보처리기사", "issuer": "한국산업인력공단", "date": "2020" }
+    { "name": "정보처리기사", "issuer": "한국산업인력공단", "date": "-" },
+    { "name": "2019 프로보노 공모전 대상", "issuer": "기타", "date": "2019" },
+    { "name": "총학생회 정책팀장", "issuer": "기타", "date": "" }
   ]
 }
 
