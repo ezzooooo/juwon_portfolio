@@ -7,6 +7,7 @@ class ResumeModel {
     required this.skills,
     required this.experiences,
     required this.education,
+    required this.sideProjects,
     required this.certificates,
   });
 
@@ -17,6 +18,7 @@ class ResumeModel {
   final Skills skills;
   final List<Experience> experiences;
   final List<Education> education;
+  final List<SideProject> sideProjects;
   final List<Certificate> certificates;
 
   factory ResumeModel.fromJson(Map<String, dynamic> json) {
@@ -36,6 +38,9 @@ class ResumeModel {
       education: (json['education'] as List<dynamic>? ?? const [])
           .map((e) => Education.fromJson(e as Map<String, dynamic>))
           .toList(),
+      sideProjects: (json['sideProjects'] as List<dynamic>? ?? const [])
+          .map((e) => SideProject.fromJson(e as Map<String, dynamic>))
+          .toList(),
       certificates: (json['certificates'] as List<dynamic>? ?? const [])
           .map((e) => Certificate.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -46,17 +51,20 @@ class ResumeModel {
 class Contacts {
   Contacts({
     this.email = '',
+    this.phone = '',
     this.github = '',
     this.linkedin = '',
     this.blog = '',
   });
   final String email;
+  final String phone;
   final String github;
   final String linkedin;
   final String blog;
 
   factory Contacts.fromJson(Map<String, dynamic> json) => Contacts(
     email: json['email'] as String? ?? '',
+    phone: json['phone'] as String? ?? '',
     github: json['github'] as String? ?? '',
     linkedin: json['linkedin'] as String? ?? '',
     blog: json['blog'] as String? ?? '',
@@ -88,9 +96,12 @@ class Skills {
     backend: (json['backend'] as List<dynamic>? ?? const [])
         .map((e) => e.toString())
         .toList(),
-    devops: (json['devops'] as List<dynamic>? ?? const [])
-        .map((e) => e.toString())
-        .toList(),
+    devops:
+        ((json['devops'] as List<dynamic>?) ??
+                (json['infra'] as List<dynamic>?) ??
+                const [])
+            .map((e) => e.toString())
+            .toList(),
     tools: (json['tools'] as List<dynamic>? ?? const [])
         .map((e) => e.toString())
         .toList(),
@@ -104,6 +115,7 @@ class Experience {
     required this.period,
     required this.summary,
     required this.achievements,
+    this.link,
   });
 
   final String company;
@@ -111,6 +123,7 @@ class Experience {
   final String period;
   final String summary;
   final List<String> achievements;
+  final String? link;
 
   factory Experience.fromJson(Map<String, dynamic> json) => Experience(
     company: json['company'] as String? ?? '',
@@ -120,6 +133,7 @@ class Experience {
     achievements: (json['achievements'] as List<dynamic>? ?? const [])
         .map((e) => e.toString())
         .toList(),
+    link: json['link'] as String?,
   );
 }
 
@@ -146,5 +160,34 @@ class Certificate {
     name: json['name'] as String? ?? '',
     issuer: json['issuer'] as String? ?? '',
     date: json['date'] as String? ?? '',
+  );
+}
+
+class SideProject {
+  SideProject({
+    required this.title,
+    required this.description,
+    required this.role,
+    required this.period,
+    required this.achievements,
+    this.link,
+  });
+
+  final String title;
+  final String description;
+  final String role;
+  final String period;
+  final List<String> achievements;
+  final String? link;
+
+  factory SideProject.fromJson(Map<String, dynamic> json) => SideProject(
+    title: json['title'] as String? ?? '',
+    description: json['description'] as String? ?? '',
+    role: json['role'] as String? ?? '',
+    period: json['period'] as String? ?? '',
+    achievements: (json['achievements'] as List<dynamic>? ?? const [])
+        .map((e) => e.toString())
+        .toList(),
+    link: json['link'] as String?,
   );
 }

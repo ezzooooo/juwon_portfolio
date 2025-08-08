@@ -1,9 +1,10 @@
 {
   "name": "이주원",
   "title": "크로스플랫폼 앱 개발자 (Flutter)",
-  "summary": "안녕하세요. 니즈를 파악하고 행동하는 개발자 이주원입니다. 4년 차 크로스플랫폼 앱 개발자로서 Flutter 기반 모바일·웹·데스크톱 프로젝트를 리딩했습니다. 복잡한 서비스 구조 개선, 디자인 시스템 구축, 성능 최적화에 강점이 있으며, 스타트업 현장에서의 협업 경험으로 서비스 완성도를 높여왔습니다.",
+  "summary": "안녕하세요. 니즈를 파악하고 행동하는 개발자 이주원입니다.\n\n4년 차 크로스플랫폼 앱 개발자로서, Flutter 기반 모바일·웹·데스크톱 프로젝트를 성공적으로 리딩한 경험이 있습니다. \n\n복잡한 서비스 구조 개선, 디자인 시스템 구축, 성능 최적화에 강점을 가지고 있으며, 다양한 도메인의 스타트업 현장에서 기획·디자인·백엔드와의 협업 경험을 통해 서비스 완성도를 높여왔습니다.",
   "contacts": {
-    "email": "dkreka@gmail.com",
+    "email": "dkreka11@gmail.com",
+    "phone": "010-4463-3474",
     "github": "https://github.com/ezzooooo",
     "linkedin": "",
     "blog": "https://jw.notion.site/cebcbeeaecdf"
@@ -11,18 +12,12 @@
   "skills": {
     "frontend": [
       "Flutter",
-      "GetX",
-      "Riverpod",
-      "Flutter Web",
-      "Flutter Desktop",
-      "In-App Purchase",
-      "Deep Link",
-      "Design System"
+      "Vue",
+      "Android"
     ],
-    "mobile": ["Android (Jetpack Compose)", "Location Services", "SSE Client"],
-    "backend": ["Laravel", "Python (Scripts)", "C#"],
-    "devops": ["AWS", "Firebase", "GitHub Actions"],
-    "tools": ["Git", "Figma", "Linux", "MySQL", "Redis", "GitHub", "SQL"]
+    "backend": ["Laravel", "Python (FastAPI)"],
+    "infra": ["AWS", "Firebase"],
+    "tools": ["Git", "Figma"]
   },
   "experiences": [
     {
@@ -35,7 +30,8 @@
         "Server-Sent-Events로 실시간 기기 제어",
         "기기 재시작 시 앱 자동 실행",
         "앱 원격 업데이트 기능"
-      ]
+      ],
+      "link": "https://bubaum.com/"
     },
     {
       "company": "바움랩스주식회사",
@@ -61,33 +57,73 @@
         "InAppPurchase 기반 인앱 결제 구현",
         "디자인 시스템 기반 UI Kit 구축",
         "재사용 위젯화로 개발 속도 40% 향상, 일관성 확보"
-      ]
+      ],
+      "link": "https://www.dalchaebi.com/"
     },
     {
-      "company": "주식회사세븐미어캣",
-      "role": "개발팀장",
+      "company": "세븐미어캣",
+      "role": "개발팀 Manager",
       "period": "2020.07 - 2022.11 (2년 5개월)",
       "summary": "서비스 전체 구조 설계/개발 및 운영, 시리즈 A 투자 유치 기여",
       "achievements": [
         "주차 시스템/앱/관리자 웹 상호 데이터 기반 DB 설계",
         "1초 이내 차단기 신호 위한 별도 주차 서버 구축",
         "앱 내 쇼핑몰(재고/타임할인/옵션/주문/배송) 개발",
-        "Flutter 마이그레이션 2회 및 Null Safety 개선",
+        "Flutter 1.x → 2.x → 3.x 마이그레이션",
         "생산 단가 30%+ 절감(라즈베리파이 분리 구조), CS 50%+ 감소"
-      ]
+      ],
+      "link": "https://meerkat.day/"
+    }
+  ],
+  "sideProjects": [
+    {
+      "title": "FRIEND ACADEMY",
+      "description": "교육 영상 시청 플랫폼",
+      "role": "Frontend 개발",
+      "period": "2025.04 - 2025.05",
+      "achievements": [
+        "Vue3 사용자 페이지 개발",
+        "Flutter Web 관리자 페이지 개발",
+        "Vimeo 연동 플레이어(속도/챕터/구간반복/전체화면) 구현",
+        "사용자 맞춤 대시보드 개발"
+      ],
+      "link": "https://friend.academy/"
+    },
+    {
+      "title": "A-PASS",
+      "description": "국내 미술 전시 예매 플랫폼",
+      "role": "Frontend 개발",
+      "period": "2025.03 - 2025.04",
+      "achievements": [
+        "Flutter Web 사용자/관리자 페이지 개발",
+        "예매 결제 시스템(결제/취소/부분취소/영수증/관리) 구축"
+      ],
+      "link": "https://artpass.co.kr/"
+    },
+    {
+      "title": "새폰내폰",
+      "description": "휴대폰 구매 시 불이익을 겪는 고객이 없도록 하기 위한 플랫폼",
+      "role": "Frontend 개발",
+      "period": "2024.09 - 2024.11",
+      "achievements": [
+        "사용자 App 및 대리점 Web 개발",
+        "견적 입력 과정 인터랙션 요소 개발",
+        "채팅 기능 개발",
+        "오픈 베타 이후 서비스 종료"
+      ],
+      "link": "https://iamnotspy.com/npmp"
     }
   ],
   "education": [
     {
       "school": "한국공학대학교",
       "degree": "컴퓨터공학과 학사 (3.94/4.5)",
-      "period": ""
+      "period": "2014.03 - 2020.02 (졸업)"
     }
   ],
   "certificates": [
-    { "name": "정보처리기사", "issuer": "한국산업인력공단", "date": "-" },
-    { "name": "2019 프로보노 공모전 대상", "issuer": "기타", "date": "2019" },
-    { "name": "총학생회 정책팀장", "issuer": "기타", "date": "" }
+    { "name": "정보처리기사", "issuer": "한국산업인력공단", "date": "2019.11" },
+    { "name": "2019 프로보노 공모전 대상", "issuer": "한국정보산업연합회", "date": "2019.12" }
   ]
 }
 

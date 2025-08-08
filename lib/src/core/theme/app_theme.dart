@@ -8,6 +8,7 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF6495ED)),
       useMaterial3: true,
       brightness: Brightness.light,
+      fontFamily: 'Pretendard',
     );
     final cs = base.colorScheme;
     return base.copyWith(
@@ -59,6 +60,7 @@ class AppTheme {
       ),
       useMaterial3: true,
       brightness: Brightness.dark,
+      fontFamily: 'Pretendard',
     );
     final cs = base.colorScheme;
     return base.copyWith(

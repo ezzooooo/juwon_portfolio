@@ -64,6 +64,29 @@ flutter:
   assets:
     - assets/data/resume_ko.json
     - assets/data/projects.json
+    - assets/images/
+
+  fonts:
+    - family: Pretendard
+      fonts:
+        - asset: fonts/Pretendard-Thin.otf
+          weight: 100
+        - asset: fonts/Pretendard-ExtraLight.otf
+          weight: 200
+        - asset: fonts/Pretendard-Light.otf
+          weight: 300
+        - asset: fonts/Pretendard-Regular.otf
+          weight: 400
+        - asset: fonts/Pretendard-Medium.otf
+          weight: 500
+        - asset: fonts/Pretendard-SemiBold.otf
+          weight: 600
+        - asset: fonts/Pretendard-Bold.otf
+          weight: 700
+        - asset: fonts/Pretendard-ExtraBold.otf
+          weight: 800
+        - asset: fonts/Pretendard-Black.otf
+          weight: 900
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
