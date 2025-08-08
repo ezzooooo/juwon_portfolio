@@ -10,6 +10,14 @@ class AppScaffold extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final String location = GoRouter.of(
+      context,
+    ).routeInformationProvider.value.uri.toString();
+    bool isActive(String path) {
+      if (path == '/') return location == '/';
+      return location == path || location.startsWith(path);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const SizedBox.shrink(),
@@ -21,24 +29,28 @@ class AppScaffold extends ConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
-                  onPressed: () => context.go('/'),
-                  child: const Text('홈'),
+                _NavItem(
+                  label: '홈',
+                  active: isActive('/'),
+                  onTap: () => context.go('/'),
                 ),
                 const SizedBox(width: 8),
-                TextButton(
-                  onPressed: () => context.go('/resume'),
-                  child: const Text('이력서'),
+                _NavItem(
+                  label: '이력서',
+                  active: isActive('/resume'),
+                  onTap: () => context.go('/resume'),
                 ),
                 const SizedBox(width: 8),
-                TextButton(
-                  onPressed: () => context.go('/projects'),
-                  child: const Text('프로젝트'),
+                _NavItem(
+                  label: '프로젝트',
+                  active: isActive('/projects'),
+                  onTap: () => context.go('/projects'),
                 ),
                 const SizedBox(width: 8),
-                TextButton(
-                  onPressed: () => context.go('/gallery'),
-                  child: const Text('위젯 모음'),
+                _NavItem(
+                  label: '위젯 모음',
+                  active: isActive('/gallery'),
+                  onTap: () => context.go('/gallery'),
                 ),
               ],
             ),
@@ -64,6 +76,45 @@ class AppScaffold extends ConsumerWidget {
           child: child,
         ),
       ),
+    );
+  }
+}
+
+class _NavItem extends StatelessWidget {
+  const _NavItem({
+    required this.label,
+    required this.active,
+    required this.onTap,
+  });
+  final String label;
+  final bool active;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle? base = Theme.of(context).textTheme.titleSmall;
+    final TextStyle? labelStyle = base?.copyWith(
+      fontWeight: active ? FontWeight.w700 : FontWeight.w500,
+    );
+    final Color indicatorColor = Theme.of(context).colorScheme.primary;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        TextButton(
+          onPressed: onTap,
+          child: Text(label, style: labelStyle),
+        ),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.easeInOut,
+          height: 2,
+          width: active ? 24 : 0,
+          decoration: BoxDecoration(
+            color: active ? indicatorColor : Colors.transparent,
+            borderRadius: const BorderRadius.all(Radius.circular(2)),
+          ),
+        ),
+      ],
     );
   }
 }

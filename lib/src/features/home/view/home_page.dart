@@ -104,38 +104,46 @@ class _FeaturedResumeSection extends StatelessWidget {
           return const SizedBox.shrink();
         }
         final resume = snapshot.data!;
-        final List<String> topAchievements = <String>[];
-        for (final exp in resume.experiences) {
-          for (final a in exp.achievements) {
-            topAchievements.add('[${exp.company}] $a');
-            if (topAchievements.length >= 6) break;
-          }
-          if (topAchievements.length >= 6) break;
-        }
         return Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (topAchievements.isNotEmpty)
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: topAchievements
-                        .map(
-                          (a) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 2),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text('• '),
-                                Expanded(child: Text(a)),
-                              ],
-                            ),
-                          ),
-                        )
-                        .toList(),
-                  ),
+                ...List.generate(resume.experiences.length, (index) {
+                  final e = resume.experiences[index];
+                  final bool isLast = index == resume.experiences.length - 1;
+                  final TextStyle? companyStyle = Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontWeight: FontWeight.w700);
+                  final TextStyle? periodStyle = Theme.of(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      );
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: isLast ? 0 : 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(e.company, style: companyStyle),
+                        const SizedBox(height: 2),
+                        Text(e.period, style: periodStyle),
+                        const SizedBox(height: 6),
+                        Text(
+                          e.summary,
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        if (!isLast) ...[
+                          const SizedBox(height: 12),
+                          const Divider(height: 1),
+                        ],
+                      ],
+                    ),
+                  );
+                }),
                 const SizedBox(height: 12),
                 Align(
                   alignment: Alignment.centerRight,

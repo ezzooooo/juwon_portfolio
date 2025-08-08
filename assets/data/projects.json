@@ -1,19 +1,111 @@
 [
   {
-    "title": "Portfolio Web",
-    "description": "Flutter Web 기반 개인 포트폴리오",
-    "role": "개발/디자인/배포",
-    "techStack": ["Flutter", "go_router", "Riverpod"],
-    "period": "2025",
-    "links": {"repo": "https://github.com/your-id/portfolio", "demo": "https://your-site.com"},
+    "title": "세븐미어캣 사용자 앱",
+    "description": "1일 10만 이상의 입출차 트래픽이 발생하는 아파트 생활 플랫폼",
+    "techStack": [
+      "Flutter",
+      "GetX",
+      "Firebase",
+      "Google Analytics",
+      "Laravel",
+      "MariaDB"
+    ],
+    "period": "2020.07 - 2022. 11",
+    "open": false,
+    "techParticipants": {
+      "앱": "2명(본인 포함)",
+      "백엔드": "2명(본인 포함)"
+    },
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": "assets/images/7meerkat.png"
+  },
+  {
+    "title": "세븐미어캣 입출차 모니터링 Windows 앱",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": "assets/images/7meerkat.png"
+  },
+  {
+    "title": "세븐미어캣 주차관제 시스템",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": "assets/images/7meerkat.png"
+  },
+  {
+    "title": "달채비",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
     "thumbnail": ""
   },
   {
-    "title": "Widget Gallery",
-    "description": "재사용 가능한 UI 컴포넌트 데모",
-    "role": "개발",
-    "techStack": ["Flutter", "Material 3"],
-    "period": "2025",
+    "title": "히어유알",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": ""
+  },
+  {
+    "title": "DID",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": ""
+  },
+  {
+    "title": "새폰내폰",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": ""
+  },
+  {
+    "title": "A-PASS",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": ""
+  },
+  {
+    "title": "프렌드 아카데미",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
+    "links": {"repo": "", "demo": ""},
+    "thumbnail": ""
+  },
+  {
+    "title": "비공페이",
+    "description": "작성 예정",
+    "techStack": [],
+    "period": "",
+    "open": false,
+    "techParticipants": {},
     "links": {"repo": "", "demo": ""},
     "thumbnail": ""
   }
