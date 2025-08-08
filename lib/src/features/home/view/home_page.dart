@@ -51,11 +51,6 @@ class _HeroSection extends StatelessWidget {
                   '주원, 니즈를 파악하고 행동하는 개발자',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
-                const SizedBox(height: 12),
-                Text(
-                  '웹·모바일 전반의 UI/상태/아키텍처를 설계하고, 퍼포먼스와 접근성을 균형 있게 추구합니다.',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
               ],
             ),
           ),
@@ -109,51 +104,38 @@ class _FeaturedResumeSection extends StatelessWidget {
           return const SizedBox.shrink();
         }
         final resume = snapshot.data!;
-        final exp = resume.experiences.isNotEmpty
-            ? resume.experiences.first
-            : null;
+        final List<String> topAchievements = <String>[];
+        for (final exp in resume.experiences) {
+          for (final a in exp.achievements) {
+            topAchievements.add('[${exp.company}] $a');
+            if (topAchievements.length >= 6) break;
+          }
+          if (topAchievements.length >= 6) break;
+        }
         return Card(
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  resume.title,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  resume.summary,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                if (exp != null) ...[
-                  const SizedBox(height: 12),
-                  Text(
-                    '${exp.company} · ${exp.role} · ${exp.period}',
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 8),
-                  if (exp.achievements.isNotEmpty)
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: exp.achievements
-                          .take(3)
-                          .map(
-                            (a) => Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text('• '),
-                                  Expanded(child: Text(a)),
-                                ],
-                              ),
+                if (topAchievements.isNotEmpty)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: topAchievements
+                        .map(
+                          (a) => Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text('• '),
+                                Expanded(child: Text(a)),
+                              ],
                             ),
-                          )
-                          .toList(),
-                    ),
-                ],
+                          ),
+                        )
+                        .toList(),
+                  ),
                 const SizedBox(height: 12),
                 Align(
                   alignment: Alignment.centerRight,
@@ -243,7 +225,11 @@ class _FeaturedProjectsSection extends StatelessWidget {
 }
 
 class _FeaturedProjectData {
-  const _FeaturedProjectData({required this.index, required this.title, required this.description});
+  const _FeaturedProjectData({
+    required this.index,
+    required this.title,
+    required this.description,
+  });
   final int index;
   final String title;
   final String description;
