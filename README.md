@@ -46,6 +46,3 @@ flutter build web --release
 - `/projects` 프로젝트 목록
 - `/projects/:id` 프로젝트 상세
 - `/gallery` 위젯 갤러리
-
-## 라이선스
-MIT
