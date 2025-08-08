@@ -33,13 +33,11 @@ jobs:
         env:
           REPO_NAME: ${{ github.event.repository.name }}
         run: |
-          if [ -f web/CNAME ]; then 
-            echo "CNAME detected. Using base href '/' for custom domain"; 
-            flutter build web --release --base-href "/"; 
-          else 
-            echo "No CNAME. Using base href '/${REPO_NAME}/'"; 
-            flutter build web --release --base-href "/${REPO_NAME}/"; 
-          fi
+          echo "Building for GitHub Pages repo site at /${REPO_NAME}/"
+          flutter build web --release --base-href "/${REPO_NAME}/"
+
+      - name: Add SPA fallback (404.html)
+        run: cp build/web/index.html build/web/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
