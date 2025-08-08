@@ -372,47 +372,17 @@ class _SideProjectsSection extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Expanded(
-                            child: Text(
-                              p.title,
-                              style: Theme.of(context).textTheme.titleLarge,
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: _ProjectTitleLink(
+                                    title: p.title,
+                                    link: p.link,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          if (p.link != null && p.link!.isNotEmpty)
-                            InkWell(
-                              onTap: () async {
-                                final uri = Uri.parse(p.link!);
-                                if (await canLaunchUrl(uri)) {
-                                  await launchUrl(
-                                    uri,
-                                    mode: LaunchMode.externalApplication,
-                                  );
-                                }
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    '사이트',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.copyWith(
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.primary,
-                                        ),
-                                  ),
-                                  const SizedBox(width: 4),
-                                  Icon(
-                                    Icons.open_in_new,
-                                    size: 18,
-                                    color: Theme.of(
-                                      context,
-                                    ).colorScheme.primary,
-                                  ),
-                                ],
-                              ),
-                            ),
                         ],
                       ),
                       const SizedBox(height: 6),
@@ -546,6 +516,45 @@ class _ContactRow extends StatelessWidget {
             Text(value, style: valueStyle),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ProjectTitleLink extends StatelessWidget {
+  const _ProjectTitleLink({required this.title, this.link});
+  final String title;
+  final String? link;
+
+  @override
+  Widget build(BuildContext context) {
+    final TextStyle? style = Theme.of(context).textTheme.titleLarge;
+    if (link == null || link!.isEmpty) {
+      return Text(title, style: style);
+    }
+    return InkWell(
+      onTap: () async {
+        final uri = Uri.parse(link!);
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+        }
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            title,
+            style: style?.copyWith(
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+          const SizedBox(width: 4),
+          Icon(
+            Icons.open_in_new,
+            size: 18,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ],
       ),
     );
   }

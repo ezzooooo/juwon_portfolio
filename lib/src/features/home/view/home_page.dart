@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../../core/widgets/app_scaffold.dart';
 import '../../../core/widgets/layout.dart';
 import '../../../core/widgets/responsive_layout.dart';
 import 'package:go_router/go_router.dart';
+import '../../resume/data/resume_model.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -16,7 +18,11 @@ class HomePage extends StatelessWidget {
           children: [
             _HeroSection(),
             const SizedBox(height: 32),
-            Section(title: '하이라이트', child: _HighlightsSection()),
+            Section(title: '핵심 이력', child: _FeaturedResumeSection()),
+            const SizedBox(height: 32),
+            Section(title: '주요 프로젝트', child: _FeaturedProjectsSection()),
+            const SizedBox(height: 32),
+            Section(title: '위젯 모음 미리보기', child: _WidgetPreviewSection()),
           ],
         ),
       ),
@@ -42,7 +48,7 @@ class _HeroSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '주원 – Flutter/Dart 엔지니어',
+                  '주원, 니즈를 파악하고 행동하는 개발자',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
                 const SizedBox(height: 12),
@@ -83,40 +89,241 @@ class _HeroSection extends StatelessWidget {
   }
 }
 
-class _HighlightsSection extends StatelessWidget {
+// _HighlightsSection는 더 이상 사용하지 않아 제거되었습니다.
+
+class _FeaturedResumeSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder<ResumeModel>(
+      future: _loadResume(context),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+        if (snapshot.hasError || !snapshot.hasData) {
+          return const SizedBox.shrink();
+        }
+        final resume = snapshot.data!;
+        final exp = resume.experiences.isNotEmpty
+            ? resume.experiences.first
+            : null;
+        return Card(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  resume.title,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  resume.summary,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                if (exp != null) ...[
+                  const SizedBox(height: 12),
+                  Text(
+                    '${exp.company} · ${exp.role} · ${exp.period}',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  if (exp.achievements.isNotEmpty)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: exp.achievements
+                          .take(3)
+                          .map(
+                            (a) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 2),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text('• '),
+                                  Expanded(child: Text(a)),
+                                ],
+                              ),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                ],
+                const SizedBox(height: 12),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: () => context.go('/resume'),
+                    child: const Text('이력서 전체 보기'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future<ResumeModel> _loadResume(BuildContext context) async {
+    final raw = await DefaultAssetBundle.of(
+      context,
+    ).loadString('assets/data/resume_ko.json');
+    return ResumeModel.fromJson(json.decode(raw) as Map<String, dynamic>);
+  }
+}
+
+class _FeaturedProjectsSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<_FeaturedProjectData>>(
+      future: _loadProjects(context),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+        if (snapshot.hasError || !snapshot.hasData) {
+          return const SizedBox.shrink();
+        }
+        final items = snapshot.data!.take(3).toList();
+        final double width = MediaQuery.sizeOf(context).width;
+        int columns = 1;
+        if (width >= 1440) {
+          columns = 3;
+        } else if (width >= 1024) {
+          columns = 3;
+        } else if (width >= 600) {
+          columns = 2;
+        }
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columns,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 4 / 3,
+          ),
+          itemCount: items.length,
+          itemBuilder: (context, index) =>
+              _FeaturedProjectCard(data: items[index]),
+        );
+      },
+    );
+  }
+
+  Future<List<_FeaturedProjectData>> _loadProjects(BuildContext context) async {
+    final String raw = await DefaultAssetBundle.of(
+      context,
+    ).loadString('assets/data/projects.json');
+    final List<dynamic> jsonList = json.decode(raw) as List<dynamic>;
+    final List<_FeaturedProjectData> all = [];
+    for (int i = 0; i < jsonList.length; i++) {
+      final m = jsonList[i] as Map<String, dynamic>;
+      all.add(
+        _FeaturedProjectData(
+          index: i,
+          title: m['title'] as String? ?? '',
+          description: m['description'] as String? ?? '',
+        ),
+      );
+    }
+    return all;
+  }
+}
+
+class _FeaturedProjectData {
+  const _FeaturedProjectData({required this.index, required this.title, required this.description});
+  final int index;
+  final String title;
+  final String description;
+}
+
+class _FeaturedProjectCard extends StatelessWidget {
+  const _FeaturedProjectCard({required this.data});
+  final _FeaturedProjectData data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => context.go('/projects/${data.index}'),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(data.title, style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: 8),
+              Expanded(child: Text(data.description)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _WidgetPreviewSection extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final items = const [
+      _HighlightCardData(title: 'Theme Switch', description: '라이트/다크 테마 전환'),
+      _HighlightCardData(
+        title: 'Responsive Layout',
+        description: '브레이크포인트 기반 레이아웃',
+      ),
+      _HighlightCardData(
+        title: 'Reusable Components',
+        description: '카드/버튼/섹션 헤더',
+      ),
+    ];
+
     final double width = MediaQuery.sizeOf(context).width;
     int columns = 1;
     if (width >= 1440) {
-      columns = 4;
+      columns = 3;
     } else if (width >= 1024) {
       columns = 3;
     } else if (width >= 600) {
       columns = 2;
     }
 
-    final List<_HighlightCardData> items = const [
-      _HighlightCardData(
-        title: 'Flutter Web 최적화',
-        description: '라우트 레이지, 이미지 최적화, 빌드 타임 단축',
-      ),
-      _HighlightCardData(title: '클린 아키텍처', description: '기능 단위 구조 및 테스트'),
-      _HighlightCardData(title: '반응형 디자인', description: '브레이크포인트 기반의 적응형 UI'),
-      _HighlightCardData(title: '접근성/SEO', description: '키보드 내비/메타/JSON-LD 적용'),
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: columns,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 4 / 3,
-      ),
-      itemCount: items.length,
-      itemBuilder: (context, index) => _HighlightCard(data: items[index]),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: columns,
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12,
+            childAspectRatio: 4 / 3,
+          ),
+          itemCount: items.length,
+          itemBuilder: (context, i) => _HighlightCard(data: items[i]),
+        ),
+        const SizedBox(height: 12),
+        Align(
+          alignment: Alignment.centerRight,
+          child: TextButton(
+            onPressed: () => context.go('/gallery'),
+            child: const Text('위젯 모음 더 보기'),
+          ),
+        ),
+      ],
     );
   }
 }

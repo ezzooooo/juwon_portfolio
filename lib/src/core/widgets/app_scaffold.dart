@@ -12,22 +12,37 @@ class AppScaffold extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Juwon Portfolio'),
+        title: const SizedBox.shrink(),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: [
-          TextButton(onPressed: () => context.go('/'), child: const Text('홈')),
-          TextButton(
-            onPressed: () => context.go('/resume'),
-            child: const Text('이력서'),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () => context.go('/'),
+                  child: const Text('홈'),
+                ),
+                const SizedBox(width: 8),
+                TextButton(
+                  onPressed: () => context.go('/resume'),
+                  child: const Text('이력서'),
+                ),
+                const SizedBox(width: 8),
+                TextButton(
+                  onPressed: () => context.go('/projects'),
+                  child: const Text('프로젝트'),
+                ),
+                const SizedBox(width: 8),
+                TextButton(
+                  onPressed: () => context.go('/gallery'),
+                  child: const Text('위젯 모음'),
+                ),
+              ],
+            ),
           ),
-          TextButton(
-            onPressed: () => context.go('/projects'),
-            child: const Text('프로젝트'),
-          ),
-          TextButton(
-            onPressed: () => context.go('/gallery'),
-            child: const Text('위젯 모음'),
-          ),
-          const SizedBox(width: 12),
           IconButton(
             tooltip: '테마 전환',
             onPressed: () {
@@ -39,29 +54,10 @@ class AppScaffold extends ConsumerWidget {
             },
             icon: const Icon(Icons.brightness_6),
           ),
+          const SizedBox(width: 8),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(child: Text('Juwon Portfolio')),
-            ListTile(title: const Text('홈'), onTap: () => context.go('/')),
-            ListTile(
-              title: const Text('이력서'),
-              onTap: () => context.go('/resume'),
-            ),
-            ListTile(
-              title: const Text('프로젝트'),
-              onTap: () => context.go('/projects'),
-            ),
-            ListTile(
-              title: const Text('위젯 모음'),
-              onTap: () => context.go('/gallery'),
-            ),
-          ],
-        ),
-      ),
+      drawer: null,
       body: SafeArea(
         child: AnimatedSwitcher(
           duration: const Duration(milliseconds: 250),
