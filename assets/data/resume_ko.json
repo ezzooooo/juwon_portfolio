@@ -21,7 +21,7 @@
   },
   "experiences": [
     {
-      "company": "주식회사 비유바움",
+      "company": "비유바움 (바움랩스 모회사)",
       "role": "Frontend 개발",
       "period": "2024.11 - 2025.04 (6개월)",
       "summary": "Digital Information Display 프론트엔드 개발 (Android 앱 2종, SSE 기반 제어/업데이트)",
@@ -34,7 +34,7 @@
       "link": "https://bubaum.com/"
     },
     {
-      "company": "바움랩스주식회사",
+      "company": "바움랩스",
       "role": "Frontend 개발",
       "period": "2024.04 - 2024.11 (8개월)",
       "summary": "히어유알 모임관리 앱 리팩토링 및 기능 개선, 위치 기반 서비스 개발",
@@ -48,7 +48,7 @@
       ]
     },
     {
-      "company": "주식회사디에이엘컴퍼니",
+      "company": "디에이엘컴퍼니",
       "role": "Frontend 개발",
       "period": "2023.06 - 2023.11 (6개월)",
       "summary": "디자인 시스템 구축, 그래프 기능 개발, 인앱 결제 기능 기획·구현 및 출시",

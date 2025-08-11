@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/gestures.dart';
 // removed unused rootBundle import
 import 'package:url_launcher/url_launcher.dart';
+// import 'package:flutter/services.dart';
 import '../../../core/widgets/app_scaffold.dart';
 import '../../../core/widgets/layout.dart';
 
@@ -15,6 +16,18 @@ class ProjectDetailPage extends StatefulWidget {
 }
 
 class _ProjectDetailPageState extends State<ProjectDetailPage> {
+  Future<List<String>> _loadScreens(
+    BuildContext context,
+    Map<String, dynamic> data,
+  ) async {
+    // JSON에 명시된 screens만 사용
+    final List<String> fromJson =
+        ((data['screens'] as List<dynamic>?) ?? const [])
+            .map((e) => e.toString())
+            .toList();
+    return fromJson;
+  }
+
   Future<Map<String, dynamic>?> _loadProject(BuildContext context) async {
     final raw = await DefaultAssetBundle.of(
       context,
@@ -65,18 +78,10 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                 ((data['improvements'] as List<dynamic>?) ?? const [])
                     .map((e) => e.toString())
                     .toList();
-            final List<String> screens =
-                ((data['screens'] as List<dynamic>?) ?? const [])
-                    .map((e) => e.toString())
-                    .toList();
-            if (screens.isEmpty) {
-              // 기본 샘플 이미지 3장
-              screens.addAll([
-                'assets/images/7meerkat.png',
-                'assets/images/my_face.jpg',
-                'assets/images/7meerkat.png',
-              ]);
-            }
+            final Future<List<String>> screensFuture = _loadScreens(
+              context,
+              data,
+            );
 
             final theme = Theme.of(context);
 
@@ -171,10 +176,27 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                     style: theme.textTheme.bodyLarge,
                   ),
                 ),
-                const SizedBox(height: 16),
-                _DetailSection(
-                  title: '주요 화면',
-                  child: _ScreensGallery(images: screens.take(10).toList()),
+                const SizedBox(height: 8),
+                FutureBuilder<List<String>>(
+                  future: screensFuture,
+                  builder: (context, s) {
+                    if (s.connectionState != ConnectionState.done) {
+                      return const SizedBox.shrink();
+                    }
+                    final List<String> imgs = s.data ?? const <String>[];
+                    if (imgs.isEmpty) return const SizedBox.shrink();
+                    return Column(
+                      children: [
+                        const SizedBox(height: 16),
+                        _DetailSection(
+                          title: '주요 화면',
+                          child: _ScreensGallery(
+                            images: imgs.take(10).toList(),
+                          ),
+                        ),
+                      ],
+                    );
+                  },
                 ),
                 const SizedBox(height: 16),
                 _DetailSection(
@@ -408,6 +430,22 @@ class _ScreensGalleryState extends State<_ScreensGallery> {
     super.dispose();
   }
 
+  void _openFullscreenViewer(BuildContext context, int initialIndex) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black87,
+      builder: (_) => Dialog(
+        insetPadding: EdgeInsets.zero,
+        backgroundColor: Colors.black,
+        surfaceTintColor: Colors.black,
+        child: _FullscreenViewer(
+          images: widget.images,
+          initialIndex: initialIndex,
+        ),
+      ),
+    );
+  }
+
   void _ensureController(double fraction) {
     if ((_pageController == null) ||
         (_viewportFraction - fraction).abs() > 1e-6) {
@@ -451,7 +489,10 @@ class _ScreensGalleryState extends State<_ScreensGallery> {
                       final path = widget.images[index];
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 6),
-                        child: _ScreenImage(path: path),
+                        child: _ScreenImage(
+                          path: path,
+                          onTap: () => _openFullscreenViewer(context, index),
+                        ),
                       );
                     },
                   ),
@@ -503,8 +544,9 @@ class _ScreensGalleryState extends State<_ScreensGallery> {
 }
 
 class _ScreenImage extends StatelessWidget {
-  const _ScreenImage({required this.path});
+  const _ScreenImage({required this.path, required this.onTap});
   final String path;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -513,33 +555,147 @@ class _ScreenImage extends StatelessWidget {
       borderRadius: const BorderRadius.all(Radius.circular(12)),
       child: Material(
         color: theme.colorScheme.surfaceContainerLow,
-        child: InkWell(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return Dialog(
-                  insetPadding: const EdgeInsets.all(64),
-                  child: InteractiveViewer(
-                    minScale: 0.5,
-                    maxScale: 5,
-                    child: _buildImage(path),
-                  ),
-                );
-              },
-            );
-          },
-          child: _buildImage(path),
-        ),
+        child: InkWell(onTap: onTap, child: _buildTileImage(path)),
       ),
     );
   }
 
-  Widget _buildImage(String p) {
+  Widget _buildTileImage(String p) {
     if (p.startsWith('http')) {
-      return Center(child: Image.network(p, fit: BoxFit.contain));
+      return SizedBox.expand(child: Image.network(p, fit: BoxFit.cover));
     }
-    return Center(child: Image.asset(p, fit: BoxFit.contain));
+    return SizedBox.expand(child: Image.asset(p, fit: BoxFit.cover));
+  }
+
+  // Dialog 이미지 렌더링은 _FullscreenViewer로 이동
+}
+
+class _FullscreenViewer extends StatefulWidget {
+  const _FullscreenViewer({required this.images, required this.initialIndex});
+  final List<String> images;
+  final int initialIndex;
+
+  @override
+  State<_FullscreenViewer> createState() => _FullscreenViewerState();
+}
+
+class _FullscreenViewerState extends State<_FullscreenViewer> {
+  late final PageController _controller;
+  late int _index;
+  bool _hintShown = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _index = widget.initialIndex.clamp(0, widget.images.length - 1);
+    _controller = PageController(initialPage: _index);
+    // 토스트 느낌의 힌트를 잠깐 표시
+    Future.delayed(const Duration(milliseconds: 200), () {
+      if (mounted) setState(() => _hintShown = true);
+      Future.delayed(const Duration(seconds: 2), () {
+        if (mounted) setState(() => _hintShown = false);
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _goPrev() {
+    final int target = (_index - 1).clamp(0, widget.images.length - 1);
+    _controller.animateToPage(
+      target,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _goNext() {
+    final int target = (_index + 1).clamp(0, widget.images.length - 1);
+    _controller.animateToPage(
+      target,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeInOut,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        PageView.builder(
+          controller: _controller,
+          onPageChanged: (i) => setState(() => _index = i),
+          itemCount: widget.images.length,
+          itemBuilder: (context, i) {
+            final p = widget.images[i];
+            return InteractiveViewer(
+              minScale: 0.5,
+              maxScale: 5,
+              child: Center(
+                child: p.startsWith('http')
+                    ? Image.network(p, fit: BoxFit.contain)
+                    : Image.asset(p, fit: BoxFit.contain),
+              ),
+            );
+          },
+        ),
+        // 좌우 내비게이션
+        if (_index > 0)
+          Positioned(
+            left: 16,
+            top: 0,
+            bottom: 0,
+            child: _NavArrow(icon: Icons.chevron_left, onTap: _goPrev),
+          ),
+        if (_index < widget.images.length - 1)
+          Positioned(
+            right: 16,
+            top: 0,
+            bottom: 0,
+            child: _NavArrow(icon: Icons.chevron_right, onTap: _goNext),
+          ),
+        // 휠 확대/축소 힌트
+        if (_hintShown)
+          Positioned(
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.7),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                ),
+                child: const Text(
+                  '휠로 확대/축소할 수 있어요',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        // 닫기 버튼
+        Positioned(
+          top: 12,
+          right: 12,
+          child: IconButton(
+            onPressed: () => Navigator.of(context).pop(),
+            icon: const Icon(Icons.close, color: Colors.white),
+            style: IconButton.styleFrom(
+              backgroundColor: Colors.black.withValues(alpha: 0.5),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 

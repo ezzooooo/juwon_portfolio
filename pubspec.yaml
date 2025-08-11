@@ -62,9 +62,19 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/data/resume_ko.json
-    - assets/data/projects.json
+    - assets/data/
     - assets/images/
+    - assets/images/projects/
+    - assets/images/projects/7meerkat_user_app/
+    - assets/images/projects/7meerkat_entry_exit_monitoring_windows/
+    - assets/images/projects/7meerkat_parking_management_system/
+    - assets/images/projects/dalchaebi/
+    - assets/images/projects/here_you_are/
+    - assets/images/projects/did/
+    - assets/images/projects/new_phone_my_phone/
+    - assets/images/projects/a_pass/
+    - assets/images/projects/friend_academy/
+    - assets/images/projects/bigong_pay/
 
   fonts:
     - family: Pretendard

@@ -1,6 +1,8 @@
 [
   {
     "title": "세븐미어캣 사용자 앱",
+    "titleEn": "7Meerkat User App",
+    "slug": "7meerkat_user_app",
     "description": "1일 10만 이상의 입출차 트래픽이 발생하는 아파트 생활 플랫폼",
     "techStack": [
       "Flutter",
@@ -17,10 +19,23 @@
       "백엔드": "2명(본인 포함)"
     },
     "links": {"repo": "", "demo": ""},
-    "thumbnail": "assets/images/7meerkat.png"
+    "thumbnail": "assets/images/7meerkat.png",
+    "screens": [
+      "assets/images/projects/7meerkat_user_app/001.jpg",
+      "assets/images/projects/7meerkat_user_app/002.jpg",
+      "assets/images/projects/7meerkat_user_app/003.jpg",
+      "assets/images/projects/7meerkat_user_app/004.jpg",
+      "assets/images/projects/7meerkat_user_app/005.jpg",
+      "assets/images/projects/7meerkat_user_app/006.jpg",
+      "assets/images/projects/7meerkat_user_app/007.jpg",
+      "assets/images/projects/7meerkat_user_app/008.jpg",
+      "assets/images/projects/7meerkat_user_app/009.jpg"
+    ]
   },
   {
     "title": "세븐미어캣 입출차 모니터링 Windows 앱",
+    "titleEn": "7Meerkat Entry/Exit Monitoring (Windows)",
+    "slug": "7meerkat_entry_exit_monitoring_windows",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -31,6 +46,8 @@
   },
   {
     "title": "세븐미어캣 주차관제 시스템",
+    "titleEn": "7Meerkat Parking Management System",
+    "slug": "7meerkat_parking_management_system",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -41,6 +58,8 @@
   },
   {
     "title": "달채비",
+    "titleEn": "Dalchaebi",
+    "slug": "dalchaebi",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -51,6 +70,8 @@
   },
   {
     "title": "히어유알",
+    "titleEn": "Here You Are",
+    "slug": "here_you_are",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -61,6 +82,8 @@
   },
   {
     "title": "DID",
+    "titleEn": "DID",
+    "slug": "did",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -71,6 +94,8 @@
   },
   {
     "title": "새폰내폰",
+    "titleEn": "New Phone My Phone",
+    "slug": "new_phone_my_phone",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -81,6 +106,8 @@
   },
   {
     "title": "A-PASS",
+    "titleEn": "A-PASS",
+    "slug": "a_pass",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -91,6 +118,8 @@
   },
   {
     "title": "프렌드 아카데미",
+    "titleEn": "Friend Academy",
+    "slug": "friend_academy",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
@@ -101,6 +130,8 @@
   },
   {
     "title": "비공페이",
+    "titleEn": "Bigong Pay",
+    "slug": "bigong_pay",
     "description": "작성 예정",
     "techStack": [],
     "period": "",
