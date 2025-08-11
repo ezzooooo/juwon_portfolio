@@ -246,6 +246,7 @@ class _ProjectThumbnail extends StatelessWidget {
       );
     }
     return Container(
+      padding: const EdgeInsets.all(16),
       color: Colors.white,
       child: Image.asset(
         thumbnail,
