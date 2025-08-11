@@ -62,7 +62,8 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
             final String repo = (links['repo'] as String?) ?? '';
             final String demo = (links['demo'] as String?) ?? '';
             final String period = (data['period'] as String?) ?? '';
-            final bool isOpen = (data['open'] as bool?) ?? false;
+            final bool isOperating = (data['operating'] as bool?) ?? false;
+            final bool isPublic = (data['open'] as bool?) ?? false;
             final Map<String, String> techParticipants =
                 ((data['techParticipants'] as Map<String, dynamic>?) ??
                         const {})
@@ -92,13 +93,15 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                 _HeaderThumbnail(thumbnail: thumbnail, title: title),
                 const SizedBox(height: 16),
 
-                // Title row with open icon
+                // Title row with 운영 여부 + 공개 여부
                 Row(
                   children: [
                     Expanded(
                       child: Text(title, style: theme.textTheme.headlineMedium),
                     ),
-                    Icon(isOpen ? Icons.public : Icons.lock, size: 20),
+                    _OperationStatusChip(isOperating: isOperating),
+                    const SizedBox(width: 6),
+                    _VisibilityStatusChip(isPublic: isPublic),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -723,6 +726,80 @@ class _NavArrow extends StatelessWidget {
             child: Icon(icon, size: 28),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _OperationStatusChip extends StatelessWidget {
+  const _OperationStatusChip({required this.isOperating});
+  final bool isOperating;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool on = isOperating;
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      decoration: BoxDecoration(
+        color: on ? scheme.primaryContainer : scheme.surfaceContainerHighest,
+        borderRadius: const BorderRadius.all(Radius.circular(999)),
+        border: Border.all(color: on ? scheme.primary : scheme.outlineVariant),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            on ? Icons.check_circle : Icons.do_not_disturb_on,
+            size: 16,
+            color: on ? scheme.primary : scheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            on ? '운영 중' : '운영 종료',
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: on ? scheme.onPrimaryContainer : scheme.onSurface,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _VisibilityStatusChip extends StatelessWidget {
+  const _VisibilityStatusChip({required this.isPublic});
+  final bool isPublic;
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    final bool pub = isPublic;
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      decoration: BoxDecoration(
+        color: pub ? scheme.secondaryContainer : scheme.surfaceContainerHighest,
+        borderRadius: const BorderRadius.all(Radius.circular(999)),
+        border: Border.all(
+          color: pub ? scheme.secondary : scheme.outlineVariant,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            pub ? Icons.public : Icons.visibility_off,
+            size: 16,
+            color: pub ? scheme.secondary : scheme.onSurfaceVariant,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            pub ? '공개' : '비공개',
+            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+              color: pub ? scheme.onSecondaryContainer : scheme.onSurface,
+            ),
+          ),
+        ],
       ),
     );
   }

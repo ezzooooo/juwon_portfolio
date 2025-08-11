@@ -31,7 +31,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
             demoUrl:
                 (m['links'] as Map<String, dynamic>?)?['demo'] as String? ?? '',
             period: m['period'] as String? ?? '',
-            isOpen: m['open'] as bool? ?? false,
+            isOperating: m['operating'] as bool? ?? false,
+            isPublic: m['open'] as bool? ?? false,
             techParticipants:
                 ((m['techParticipants'] as Map<String, dynamic>?) ?? const {})
                     .map((key, value) => MapEntry(key, value.toString())),
@@ -95,7 +96,8 @@ class _ProjectCardData {
     this.repoUrl = '',
     this.demoUrl = '',
     this.period = '',
-    this.isOpen = false,
+    this.isOperating = false,
+    this.isPublic = false,
     this.techParticipants = const {},
     this.thumbnail = '',
   });
@@ -105,7 +107,8 @@ class _ProjectCardData {
   final String repoUrl;
   final String demoUrl;
   final String period;
-  final bool isOpen;
+  final bool isOperating;
+  final bool isPublic;
   final Map<String, String> techParticipants;
   final String thumbnail;
 }
@@ -132,16 +135,7 @@ class _ProjectCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            data.title,
-                            style: theme.textTheme.titleLarge,
-                          ),
-                        ),
-                      ],
-                    ),
+                    Text(data.title, style: theme.textTheme.titleLarge),
                     const SizedBox(height: 6),
                     if (data.period.isNotEmpty) ...[
                       Row(
@@ -251,15 +245,18 @@ class _ProjectThumbnail extends StatelessWidget {
         ),
       );
     }
-    return Image.asset(
-      thumbnail,
-      height: height,
-      width: double.infinity,
-      fit: BoxFit.fitHeight,
-      errorBuilder: (_, __, ___) => Container(
+    return Container(
+      color: Colors.white,
+      child: Image.asset(
+        thumbnail,
         height: height,
-        color: Theme.of(context).colorScheme.surfaceContainerHighest,
-        child: const Center(child: Icon(Icons.broken_image, size: 40)),
+        width: double.infinity,
+        fit: BoxFit.fitWidth,
+        errorBuilder: (_, __, ___) => Container(
+          height: height,
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          child: const Center(child: Icon(Icons.broken_image, size: 40)),
+        ),
       ),
     );
   }
@@ -307,3 +304,5 @@ class _TechParticipantsWrap extends StatelessWidget {
     );
   }
 }
+
+// 목록 화면에서는 상태 배지를 사용하지 않습니다.
