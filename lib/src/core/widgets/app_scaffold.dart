@@ -46,12 +46,7 @@ class AppScaffold extends ConsumerWidget {
                   active: isActive('/projects'),
                   onTap: () => context.go('/projects'),
                 ),
-                const SizedBox(width: 8),
-                _NavItem(
-                  label: '위젯 모음',
-                  active: isActive('/gallery'),
-                  onTap: () => context.go('/gallery'),
-                ),
+                // 위젯 모음 탭 제거
               ],
             ),
           ),

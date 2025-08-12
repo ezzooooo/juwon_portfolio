@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../features/gallery/view/gallery_page.dart';
 import '../../features/home/view/home_page.dart';
 import '../../features/projects/view/projects_page.dart';
 import '../../features/resume/view/resume_page.dart';
@@ -37,12 +36,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           return MaterialPage(child: ProjectDetailPage(id: id));
         },
       ),
-      GoRoute(
-        path: '/gallery',
-        name: 'gallery',
-        pageBuilder: (context, state) =>
-            const MaterialPage(child: GalleryPage()),
-      ),
+      // gallery route removed
     ],
     errorPageBuilder: (context, state) => MaterialPage(
       child: Scaffold(

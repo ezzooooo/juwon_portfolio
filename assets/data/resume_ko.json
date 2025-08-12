@@ -1,7 +1,7 @@
 {
   "name": "이주원",
-  "title": "크로스플랫폼 앱 개발자 (Flutter)",
-  "summary": "안녕하세요. 니즈를 파악하고 행동하는 개발자 이주원입니다.\n\n5년 차 크로스플랫폼 앱 개발자로서, Flutter 기반 모바일·웹·데스크톱 프로젝트를 성공적으로 리딩한 경험이 있습니다. \n\n복잡한 서비스 구조 개선, 디자인 시스템 구축, 성능 최적화에 강점을 가지고 있으며, 다양한 도메인의 스타트업 현장에서 기획·디자인·백엔드와의 협업 경험을 통해 서비스 완성도를 높여왔습니다.",
+  "title": "크로스플랫폼 앱/웹 프론트엔드 (Flutter · Vue · Android)",
+  "summary": "안녕하세요. 니즈를 파악하고 행동하는 개발자 이주원입니다.\n\nFlutter(모바일/웹/데스크톱)와 Vue3 웹, Android Compose 기반으로 다수의 프로덕트를 빠르게 구축·개선해 왔습니다. 아키텍처 리팩토링(GetX→Riverpod), 성능 최적화, 디자인 시스템, 결제/본인인증(Billgate/Bootpay), 스트리밍(Vimeo), 운영 지표/알림/SLA까지 고려한 엔드투엔드 개선에 강점이 있습니다.",
   "contacts": {
     "email": "dkreka11@gmail.com",
     "phone": "010-4463-3474",
@@ -12,24 +12,36 @@
   "skills": {
     "frontend": [
       "Flutter",
-      "Vue",
-      "Android"
+      "Flutter Web",
+      "Vue 3",
+      "Android Compose"
     ],
-    "backend": ["Laravel", "Python (FastAPI)"],
-    "infra": ["AWS", "Firebase"],
-    "tools": ["Git", "Figma"]
+    "backend": [
+      "Laravel",
+      "Python (FastAPI)"
+    ],
+    "infra": [
+      "AWS",
+      "Firebase"
+    ],
+    "tools": [
+      "Git",
+      "Figma",
+      "Amplitude",
+      "AppsFlyer"
+    ]
   },
   "experiences": [
     {
       "company": "비유바움 (바움랩스 모회사)",
       "role": "Frontend 개발",
       "period": "2024.11 - 2025.04 (6개월)",
-      "summary": "Digital Information Display 프론트엔드 개발 (Android 앱 2종, SSE 기반 제어/업데이트)",
+      "summary": "DID(디지털 사이니지) 프론트엔드: 플레이어/컨트롤 앱 분리, SSE 원격 제어, ADB 무인 업데이트",
       "achievements": [
-        "Jetpack Compose 기반 UI 개발",
-        "Server-Sent-Events로 실시간 기기 제어",
-        "기기 재시작 시 앱 자동 실행",
-        "앱 원격 업데이트 기능"
+        "Jetpack Compose UI",
+        "SSE로 실시간 제어/명령 처리",
+        "체크섬 검증/재생 리포팅/프리로딩(이중 플레이어)",
+        "ADB 기반 무인 업데이트"
       ],
       "link": "https://bubaum.com/"
     },
@@ -39,12 +51,11 @@
       "period": "2024.04 - 2024.11 (8개월)",
       "summary": "히어유알 모임관리 앱 리팩토링 및 기능 개선, 위치 기반 서비스 개발",
       "achievements": [
-        "캘린더 기반 UI/UX 개편",
-        "위치 기반 맛집 추천 기능(Tmap API)",
-        "GetX → Riverpod 마이그레이션 및 안전한 Context 사용",
-        "이벤트 딥링크 구현",
-        "API 응답 제네릭 모델링",
-        "로딩/사용 속도 개선(컨트롤러 생명주기 최적화)"
+        "GetX → Riverpod 마이그레이션(컨트롤러 의존 제거)",
+        "API 제네릭 응답 모델 도입",
+        "캘린더 UI 전환(table_calendar)",
+        "위치 기반 맛집/장소 검색(Tmap)",
+        "딥링크 구현"
       ]
     },
     {
@@ -53,11 +64,10 @@
       "period": "2023.06 - 2023.11 (6개월)",
       "summary": "디자인 시스템 구축, 그래프 기능 개발, 인앱 결제 기능 기획·구현 및 출시",
       "achievements": [
-        "결제 프로세스 정립",
-        "InAppPurchase 기반 인앱 결제 구현",
-        "디자인 시스템 기반 통일된 컴포넌트 구축",
-        "재사용 위젯화로 개발 속도 40% 향상, 일관성 확보",
-        "커스텀 차트, 꺾은 선 그래프 구현"
+        "인앱 결제(iap) 플로우 구축",
+        "커스텀 차트/리포트 구성",
+        "디자인 시스템 기반 컴포넌트 정리",
+        "Amplitude/AppsFlyer 지표 연동"
       ],
       "link": "https://www.dalchaebi.com/"
     },
@@ -67,11 +77,11 @@
       "period": "2020.07 - 2022.11 (2년 5개월)",
       "summary": "서비스 전체 구조 설계/개발 및 운영, 시리즈 A 투자 유치 기여",
       "achievements": [
-        "주차 시스템/앱/관리자 웹 상호 데이터 기반 DB 설계",
-        "1초 이내 차단기 신호 위한 별도 주차 서버 구축",
-        "앱 내 쇼핑몰(재고/타임할인/옵션/주문/배송) 개발",
-        "Flutter 1.x → 2.x → 3.x 마이그레이션",
-        "생산 단가 30%+ 절감(라즈베리파이 분리 구조), CS 50%+ 감소"
+        "관제 시즌3: FastAPI 미들웨어 + Raspberry Pi 엣지 분리(단가 30%+↓, CS 50%+↓)",
+        "차단기 신호/번호인식/카메라/로그 연동",
+        "방문자 사전등록·무인 게이트 통과",
+        "앱 내 커머스 도입",
+        "Flutter 1→3 마이그레이션"
       ],
       "link": "https://meerkat.day/"
     }
@@ -123,9 +133,15 @@
     }
   ],
   "certificates": [
-    { "name": "정보처리기사", "issuer": "한국산업인력공단", "date": "2019.11" },
-    { "name": "2019 프로보노 공모전 대상", "issuer": "한국정보산업연합회", "date": "2019.12" }
+    {
+      "name": "정보처리기사",
+      "issuer": "한국산업인력공단",
+      "date": "2019.11"
+    },
+    {
+      "name": "2019 프로보노 공모전 대상",
+      "issuer": "한국정보산업연합회",
+      "date": "2019.12"
+    }
   ]
 }
-
-
