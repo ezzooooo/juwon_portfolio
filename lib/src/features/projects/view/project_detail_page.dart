@@ -98,7 +98,34 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                 Row(
                   children: [
                     Expanded(
-                      child: Text(title, style: theme.textTheme.headlineMedium),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              title,
+                              style: theme.textTheme.headlineMedium,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          if (repo.isNotEmpty) ...[
+                            const SizedBox(width: 8),
+                            _TitleLinkIcon(
+                              tooltip: 'Repo',
+                              icon: Icons.code,
+                              url: repo,
+                            ),
+                          ],
+                          if (demo.isNotEmpty) ...[
+                            const SizedBox(width: 4),
+                            _TitleLinkIcon(
+                              tooltip: isOperating ? '공식 사이트' : '데모',
+                              icon: Icons.open_in_new,
+                              url: demo,
+                            ),
+                          ],
+                        ],
+                      ),
                     ),
                     _OperationStatusChip(isOperating: isOperating),
                     const SizedBox(width: 6),
@@ -138,42 +165,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                   ),
                 ],
 
-                if (repo.isNotEmpty || demo.isNotEmpty) ...[
-                  const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      if (repo.isNotEmpty)
-                        TextButton.icon(
-                          onPressed: () async {
-                            final url = Uri.parse(repo);
-                            if (await canLaunchUrl(url)) {
-                              await launchUrl(
-                                url,
-                                mode: LaunchMode.externalApplication,
-                              );
-                            }
-                          },
-                          icon: const Icon(Icons.code),
-                          label: const Text('Repo'),
-                        ),
-                      if (demo.isNotEmpty)
-                        TextButton.icon(
-                          onPressed: () async {
-                            final url = Uri.parse(demo);
-                            if (await canLaunchUrl(url)) {
-                              await launchUrl(
-                                url,
-                                mode: LaunchMode.externalApplication,
-                              );
-                            }
-                          },
-                          icon: const Icon(Icons.open_in_new),
-                          label: const Text('Demo'),
-                        ),
-                    ],
-                  ),
-                ],
-
+                // Repo/Demo 버튼은 타이틀 우측 아이콘으로 이동
                 const SizedBox(height: 24),
 
                 // Structured sections
@@ -835,6 +827,41 @@ class _SideProjectChip extends StatelessWidget {
             ).textTheme.labelLarge?.copyWith(color: scheme.onTertiaryContainer),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _TitleLinkIcon extends StatelessWidget {
+  const _TitleLinkIcon({
+    required this.tooltip,
+    required this.icon,
+    required this.url,
+  });
+  final String tooltip;
+  final IconData icon;
+  final String url;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () async {
+        final uri = Uri.parse(url);
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+        }
+      },
+      borderRadius: const BorderRadius.all(Radius.circular(6)),
+      child: Padding(
+        padding: const EdgeInsets.all(4),
+        child: Tooltip(
+          message: tooltip,
+          child: Icon(
+            icon,
+            size: 20,
+            color: Theme.of(context).colorScheme.primary,
+          ),
+        ),
       ),
     );
   }

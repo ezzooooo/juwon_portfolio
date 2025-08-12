@@ -332,51 +332,136 @@
     "title": "A-PASS",
     "titleEn": "A-PASS",
     "slug": "a_pass",
-    "description": "작성 예정",
-    "techStack": [],
-    "period": "",
-    "open": false,
-    "operating": false,
+    "description": "국내 미술 전시 예매의 디지털 전환을 목표로 한 플랫폼. 1개월 내에 신속 구축하여 ‘마르크 샤갈 전시’ 예매 사이트로 오픈.",
+    "techStack": [
+      "Flutter Web",
+      "Riverpod",
+      "Go Router",
+      "Billgate",
+      "Bootpay(본인인증)",
+      "Freezed",
+      "Retrofit",
+      "Dio"
+    ],
+    "period": "2025.03 - 2025.04",
+    "open": true,
+    "operating": true,
     "sideProject": true,
-    "techParticipants": {},
+    "techParticipants": {
+      "프론트엔드": "1명(본인)",
+      "백엔드": "1명"
+    },
     "links": {
       "repo": "",
-      "demo": ""
+      "demo": "https://artpass.co.kr/"
     },
-    "thumbnail": ""
+    "thumbnail": "assets/images/a_pass.jpg",
+    "overview": "플러터 웹 기반으로 사용자 예매 웹과 관리자 웹을 단기간에 동시 구축. 사용자 측은 포스터/상세/예매 플로우와 결제(Billgate)·본인인증(Bootpay)을 제공하고, 관리자 측은 대시보드에서 예매 내역·티켓 사용 처리·결제 내역을 통합 관리.",
+    "achievements": [
+      "빠른 출시: 약 1개월 내 사용자/관리자 웹 동시 구축 및 ‘마르크 샤갈 전시’ 오픈",
+      "결제/본인인증: Billgate 결제(승인/실패/취소) 및 Bootpay 본인인증 연동",
+      "관리 기능: 관리자 대시보드에서 예매 내역, 티켓 사용 처리, 결제 내역 관리",
+      "플러터 웹 적용: 단일 코드베이스로 사용자/관리자 웹 동시 개발"
+    ],
+    "improvements": [
+      "결제 실패 재시도·환불·정산 리포트 자동화",
+      "지표/퍼널 계측 및 캠페인 트래킹 연동"
+    ],
+    "screens": [
+      "assets/images/projects/a_pass/001.jpg",
+      "assets/images/projects/a_pass/002.jpg",
+      "assets/images/projects/a_pass/003.jpg",
+      "assets/images/projects/a_pass/004.jpg",
+      "assets/images/projects/a_pass/005.jpg",
+      "assets/images/projects/a_pass/006.jpg"
+    ]
   },
   {
     "title": "프렌드 아카데미",
     "titleEn": "Friend Academy",
     "slug": "friend_academy",
-    "description": "작성 예정",
-    "techStack": [],
-    "period": "",
-    "open": false,
-    "operating": false,
+    "description": "비대면 교육 수요에 대응하는 교육 영상 시청 플랫폼. 춤 관련 프로그램/강좌를 커리큘럼에 맞춰 수강하고 진행률을 확인.",
+    "techStack": [
+      "Vue 3 (User Web)",
+      "Flutter Web (Admin)",
+      "Vimeo",
+      "TypeScript",
+      "Nicepay API",
+      "Bootpay(본인인증)",
+      "html_editor_enhanced"
+    ],
+    "period": "2025.04 - 2025.05",
+    "open": true,
+    "operating": true,
     "sideProject": true,
-    "techParticipants": {},
+    "techParticipants": {
+      "프론트엔드": "1명(본인)",
+      "백엔드": "1명"
+    },
     "links": {
       "repo": "",
-      "demo": ""
+      "demo": "https://friend.academy/"
     },
-    "thumbnail": ""
+    "thumbnail": "assets/images/friend_academy.jpg",
+    "overview": "2개월 내 사용자 웹(Vue 3)과 관리자 웹(Flutter Web)을 구축했습니다. 사용자는 대시보드에서 학습 진행률을 확인하고, 커스텀 강좌 플레이어로 배속/웹캠 오버레이/챕터 이동/구간 반복/전체화면을 지원합니다. VOD/라이브는 Vimeo 연동으로 제공했으며, PC/모바일 반응형 UI와 PC 영상 목록의 호버 프리뷰(디밍+확대+샘플 자동 재생)를 구현했습니다.",
+    "achievements": [
+      "커스텀 강좌 플레이어: 배속, 웹캠 띄우기, 챕터 이동, 구간 반복, 전체화면 지원",
+      "진행률 대시보드: 사용자별 학습 진척도 조회",
+      "Vimeo 연동: VOD/라이브 스트리밍 재생 파이프라인 구축",
+      "반응형 UX: PC/모바일 대응, PC 목록 호버 시 디밍+확대+샘플 자동 재생",
+      "관리자 웹(Flutter Web): 강좌/커리큘럼/사용자 관리 기능 구현",
+      "단기간 구축: 총 2개월 내 사용자/관리자 웹 동시 개발",
+      "결제/본인인증: NICEPAY 결제 연동, Bootpay 본인인증 적용",
+      "게시판: Admin에서 html_editor_enhanced로 HTML 저장, User는 Vue v-html로 렌더링",
+      "Vimeo 임베드 파서: 임베드 코드 정규식 파싱→필수 정보만 추출, 사용자 웹에서 iframe 크기 동적 조절"
+    ],
+    "improvements": [
+      "플레이어 일원화 과제: Flutter Web iframe 제약으로 사용자 웹을 Vue로 전환 — 장기적으로 단일 코드베이스 전략 검토"
+    ],
+    "screens": [
+      "assets/images/projects/friend_academy/001.jpg",
+      "assets/images/projects/friend_academy/001_mobile.jpg",
+      "assets/images/projects/friend_academy/002.jpg",
+      "assets/images/projects/friend_academy/002_mobile.jpg",
+      "assets/images/projects/friend_academy/003.jpg",
+      "assets/images/projects/friend_academy/003_mobile.jpg",
+      "assets/images/projects/friend_academy/004.jpg",
+      "assets/images/projects/friend_academy/004_mobile.jpg"
+    ]
   },
   {
     "title": "비공페이",
-    "titleEn": "Bigong Pay",
-    "slug": "bigong_pay",
-    "description": "작성 예정",
-    "techStack": [],
-    "period": "",
-    "open": false,
-    "operating": false,
+    "titleEn": "B0 Pay",
+    "slug": "b0pay",
+    "description": "인플루언서를 통한 티켓/상품 판매 대행 플랫폼.",
+    "techStack": [
+      "Flutter Web (User/Admin)",
+      "Billgate",
+      "Bootpay(본인인증)",
+      "Daum Postcode API"
+    ],
+    "period": "2025.06 - 2025.08",
+    "open": true,
+    "operating": true,
     "sideProject": true,
-    "techParticipants": {},
+    "techParticipants": {
+      "프론트엔드": "1명(본인)",
+      "백엔드": "1명"
+    },
     "links": {
       "repo": "",
-      "demo": ""
+      "demo": "https://b0pay.com/"
     },
-    "thumbnail": ""
+    "thumbnail": "assets/images/b0pay.jpg",
+    "overview": "사용자/관리자 웹을 Flutter Web로 개발. Billgate 결제, Bootpay 본인인증, 다음 주소 API로 배송지 입력을 지원.",
+    "achievements": [
+      "결제/본인인증 통합: Billgate 결제, Bootpay 본인인증 연동",
+      "주소/배송: Daum Postcode API 기반 배송지 입력 플로우 구축",
+      "관리자 웹: 주문·배송·정산 관리 화면 구성"
+    ],
+    "improvements": [
+      "정산 자동화/리포트 고도화",
+      "프로모션/추천 트래킹·지표 강화"
+    ]
   }
 ]
