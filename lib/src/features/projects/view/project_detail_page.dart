@@ -64,6 +64,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
             final String period = (data['period'] as String?) ?? '';
             final bool isOperating = (data['operating'] as bool?) ?? false;
             final bool isPublic = (data['open'] as bool?) ?? false;
+            final bool isSideProject = (data['sideProject'] as bool?) ?? false;
             final Map<String, String> techParticipants =
                 ((data['techParticipants'] as Map<String, dynamic>?) ??
                         const {})
@@ -102,6 +103,10 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                     _OperationStatusChip(isOperating: isOperating),
                     const SizedBox(width: 6),
                     _VisibilityStatusChip(isPublic: isPublic),
+                    if (isSideProject) ...[
+                      const SizedBox(width: 6),
+                      const _SideProjectChip(),
+                    ],
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -798,6 +803,36 @@ class _VisibilityStatusChip extends StatelessWidget {
             style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: pub ? scheme.onSecondaryContainer : scheme.onSurface,
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SideProjectChip extends StatelessWidget {
+  const _SideProjectChip();
+
+  @override
+  Widget build(BuildContext context) {
+    final ColorScheme scheme = Theme.of(context).colorScheme;
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      decoration: BoxDecoration(
+        color: scheme.tertiaryContainer,
+        borderRadius: const BorderRadius.all(Radius.circular(999)),
+        border: Border.all(color: scheme.tertiary),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.auto_awesome, size: 16, color: scheme.tertiary),
+          const SizedBox(width: 6),
+          Text(
+            '사이드 프로젝트',
+            style: Theme.of(
+              context,
+            ).textTheme.labelLarge?.copyWith(color: scheme.onTertiaryContainer),
           ),
         ],
       ),
