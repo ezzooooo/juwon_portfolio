@@ -17,10 +17,24 @@ class _ProjectsPageState extends State<ProjectsPage> {
       context,
     ).loadString('assets/data/projects.json');
     final List<dynamic> jsonList = json.decode(raw) as List<dynamic>;
-    return jsonList
-        .map((e) => e as Map<String, dynamic>)
-        .map(
-          (m) => _ProjectCardData(
+    DateTime parseStart(String period) {
+      final String left = (period.split('-').first).trim();
+      final RegExp reg = RegExp(r"(\d{4})\D+(\d{1,2})");
+      final Match? match = reg.firstMatch(left);
+      if (match != null) {
+        final int year = int.tryParse(match.group(1) ?? '') ?? 9999;
+        final int month = int.tryParse(match.group(2) ?? '') ?? 12;
+        return DateTime(year, month, 1);
+      }
+      return DateTime(9999, 12, 31);
+    }
+
+    final List<_ProjectCardData> list = [
+      for (int i = 0; i < jsonList.length; i++)
+        () {
+          final m = jsonList[i] as Map<String, dynamic>;
+          return _ProjectCardData(
+            originalIndex: i,
             title: m['title'] as String? ?? '',
             description: m['description'] as String? ?? '',
             tech: (m['techStack'] as List<dynamic>? ?? const [])
@@ -37,9 +51,13 @@ class _ProjectsPageState extends State<ProjectsPage> {
                 ((m['techParticipants'] as Map<String, dynamic>?) ?? const {})
                     .map((key, value) => MapEntry(key, value.toString())),
             thumbnail: m['thumbnail'] as String? ?? '',
-          ),
-        )
-        .toList();
+          );
+        }(),
+    ];
+
+    // 최신 시작일이 먼저 오도록 내림차순 정렬
+    list.sort((a, b) => parseStart(b.period).compareTo(parseStart(a.period)));
+    return list;
   }
 
   @override
@@ -90,6 +108,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
 
 class _ProjectCardData {
   const _ProjectCardData({
+    required this.originalIndex,
     required this.title,
     required this.description,
     required this.tech,
@@ -101,6 +120,7 @@ class _ProjectCardData {
     this.techParticipants = const {},
     this.thumbnail = '',
   });
+  final int originalIndex;
   final String title;
   final String description;
   final List<String> tech;
@@ -124,7 +144,7 @@ class _ProjectCard extends StatelessWidget {
     return Card(
       clipBehavior: Clip.antiAlias,
       child: InkWell(
-        onTap: () => GoRouter.of(context).go('/projects/$index'),
+        onTap: () => GoRouter.of(context).go('/projects/${data.originalIndex}'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
