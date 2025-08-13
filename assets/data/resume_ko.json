@@ -36,7 +36,7 @@
       "company": "비유바움 (바움랩스 모회사)",
       "role": "Frontend 개발",
       "period": "2024.11 - 2025.04 (6개월)",
-      "summary": "DID(디지털 사이니지) 프론트엔드: 플레이어/컨트롤 앱 분리, SSE 원격 제어, ADB 무인 업데이트",
+      "summary": "DID(디지털 광고 시스템) 프론트엔드: 플레이어/컨트롤 앱 분리, SSE 원격 제어, ADB 무인 업데이트",
       "achievements": [
         "Jetpack Compose UI",
         "SSE로 실시간 제어/명령 처리",
