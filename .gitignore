@@ -1,3 +1,6 @@
+# Interview prep notes (local only)
+docs/techtaka_foundation_interview_prep.md
+docs/*.private.md
 # Miscellaneous
 *.class
 *.log
